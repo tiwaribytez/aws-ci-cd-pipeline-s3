@@ -1,59 +1,117 @@
-# AWS CI/CD Pipeline Deployment (S3 & CodePipeline)
+# 🚀 AWS CI/CD Pipeline Deployment (S3 & CodePipeline)
 
-This project demonstrates building a **CI/CD Pipeline** using **AWS CodePipeline**, **AWS CodeBuild**, and **Amazon S3** for static website hosting.
-
-Whenever you push code to GitHub, the pipeline automatically:
-- Pulls the latest commit.
-- Builds the code (optional for static sites).
-- Deploys it to an S3 bucket configured for static website hosting.
+This project demonstrates setting up a **CI/CD pipeline** for a **React application** using **AWS CodePipeline**, **AWS CodeBuild**, and **Amazon S3**.
 
 ---
 
-## 🚀 Tech Stack
+## 📌 Project Overview
 
-- **AWS S3** — Static Website Hosting
-- **AWS CodePipeline** — Orchestration of CI/CD
-- **AWS CodeBuild** — Building the application (optional)
-- **GitHub** — Source Control
+Automate the deployment process so that any code pushed to GitHub is automatically built and deployed to an S3 static website.
 
 ---
 
-## 📋 Steps to Deploy
+## 🛠️ AWS Services Used
+
+| Service             | Purpose                                                   |
+|---------------------|-----------------------------------------------------------|
+| **AWS CodePipeline** | Automates the source → build → deploy process             |
+| **AWS CodeBuild**   | Installs dependencies, builds the React app                |
+| **Amazon S3**       | Hosts the static React website                             |
+| **GitHub**          | Source code repository                                     |
+
+---
+
+## 🧩 Key Concepts Implemented
+
+### ✅ CI/CD Workflow
+
+- **Continuous Integration**: Automatically build and test React code when pushed.
+- **Continuous Deployment**: Automatically deploy successful builds to S3.
+
+---
+
+## 🚀 Step-by-Step Workflow
 
 ### 1. Create an S3 Bucket
-- Create a new bucket in S3.
 - Enable **Static Website Hosting**.
-- Set appropriate permissions (public read access or via CloudFront).
+- Configure the bucket for **public read access**.
+- Apply a bucket policy for security:
 
-### 2. Set Up CodePipeline
-- Create a new pipeline.
-- **Source Stage**: Connect GitHub repository and select branch.
-- **Build Stage**: Create or select an AWS CodeBuild project (see Step 3).
-- **Deploy Stage**: Deploy to the configured S3 Bucket.
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::your-bucket-name/*"
+    }
+  ]
+}
+```
 
-### 3. Set Up CodeBuild (Optional for Static Sites)
-- Create a CodeBuild Project:
-  - **Environment**: Ubuntu/Linux image.
-  - **Buildspec**: Use `buildspec.yml` from the repository.
+### 2. Create a GitHub Repository
+- Initialize a repo and push the React project.
 
-### 4. Push Code to GitHub
-- On every push, the pipeline triggers automatically:
-  - Fetches latest code.
-  - Runs build steps (if configured).
-  - Deploys output to the S3 bucket.
+### 3. Add a buildspec.yml File
+
+Sample `buildspec.yml`:
+
+```yaml
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install
+  build:
+    commands:
+      - npm run build
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist
+```
+
+- This file instructs CodeBuild on how to install, build, and package the app.
+
+### 4. Set Up AWS CodeBuild
+- Connect CodeBuild to the GitHub repo.
+- Use the Node.js 18 runtime environment.
+- Point it to the `buildspec.yml` file.
+
+### 5. Set Up AWS CodePipeline
+- **Source**: GitHub repo (triggered on push).
+- **Build**: CodeBuild project.
+- **Deploy**: S3 static website bucket.
 
 ---
 
-## 📣 About Me
+## ❗ Common Issue Encountered
 
-**Author**: Abhishek Bhagat  
-**LinkedIn**: [Connect with me](https://linkedin.com/in/abhishekbhagat98)  
-
-I love building cloud-native solutions and automating workflows! 🚀
+### 403 Forbidden Error
+- **Issue**: S3 site returned a 403 error after deployment.
+- **Fix**: Corrected the bucket policy to allow public read access to the files.
 
 ---
 
-## 📜 License
+## 🎯 Final Outcome
 
-This project is licensed under the [MIT License](LICENSE).
+- Successfully deployed a React web app to S3 using a fully automated CI/CD pipeline.
+- Future GitHub pushes automatically rebuild and redeploy the app!
 
+---
+
+## 📎 Documentation
+
+For a detailed walk-through with step-by-step notes, refer to:
+
+[📄 AWS CI-CD Pipeline Deployment with S3 and CodePipeline.pdf](./AWS%20CI-CD%20Pipeline%20Deployment%20with%20S3%20and%20CodePipeline.pdf)
+
+---
+
+## 👤 About Me
+
+I’m Abhishek Bhagat, a Cloud Engineer passionate about automating deployments and building secure, scalable AWS architectures.  
+Check out more on [GitHub](https://github.com/abhishekbhagat98)!
