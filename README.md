@@ -56,18 +56,6 @@ Whenever you push code to GitHub, the pipeline automatically:
 
 ---
 
-## 📈 Pipeline Flow Diagram
-
-```mermaid
-graph LR
-A[GitHub Commit] --> B[Source Stage - CodePipeline]
-B --> C[Build Stage - CodeBuild (Optional)]
-C --> D[Deploy Stage - S3 Static Hosting]
-D --> E[Live Website!]
-```
-
----
-
 ## 📣 About Me
 
 **Author**: Abhishek Bhagat  
