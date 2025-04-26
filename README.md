@@ -44,18 +44,6 @@ Whenever you push code to GitHub, the pipeline automatically:
 
 ---
 
-## 📂 Project Structure
-
-```bash
-.
-├── README.md
-├── buildspec.yml
-└── docs/
-    └── project-summary.md
-```
-
----
-
 ## 📣 About Me
 
 **Author**: Abhishek Bhagat  
