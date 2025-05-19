@@ -101,17 +101,10 @@ artifacts:
 - Successfully deployed a React web app to S3 using a fully automated CI/CD pipeline.
 - Future GitHub pushes automatically rebuild and redeploy the app!
 
----
-
-## 📎 Documentation
-
-For a detailed walk-through with step-by-step notes, refer to:
-
-[📄 AWS CI-CD Pipeline Deployment with S3 and CodePipeline.pdf](./AWS%20CI-CD%20Pipeline%20Deployment%20with%20S3%20and%20CodePipeline.pdf)
 
 ---
 
 ## 👤 About Me
 
-I’m Abhishek Bhagat, a Cloud Engineer passionate about automating deployments and building secure, scalable AWS architectures.  
-Check out more on [GitHub](https://github.com/abhishekbhagat98)!
+I’m Anand Tiwari, a DevOps Engineer passionate about automating deployments and building secure, scalable AWS architectures.  
+Check out more on [GitHub](https://github.com/tiwaribytez)!
